@@ -233,6 +233,13 @@ function generateTweet() {
   document.getElementById('tweet').innerText = tweet;
 }
 
+function copyToClipboard(elementId) {
+  const text = document.getElementById(elementId).innerText;
+  navigator.clipboard.writeText(text)
+      .then(() => alert('Texto copiado al portapapeles!'))
+      .catch(err => alert('Error al copiar texto: ', err));
+}
+
 function generateFinalReport() {
   const v1Marca = document.getElementById('v1Marca').value;
   const v1Modelo = document.getElementById('v1Modelo').value;
