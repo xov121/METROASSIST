@@ -38,6 +38,7 @@
             padding: 10px;
             border-top-left-radius: 5px;
             border-top-right-radius: 5px;
+            margin-right: 5px;
         }
         .tab-header.active {
             background-color: #ddd;
@@ -54,13 +55,19 @@
         fieldset legend {
             font-weight: bold;
         }
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
     </style>
 </head>
 <body>
   <h1>MetroAssist WORK IN PROGRESS last update: June 8th, 2024 5:40 a.m.<img src="logo.png" alt="MetroAssist Logo" style="width: 100px; height: auto; vertical-align: middle; margin-left: 10px;"></h1>
     <div class="tabs">
         <div class="tab-header active" data-tab="report">Generador de Accidente</div>
-        <div class="tab-header" data-tab="finalReport">Reporte Final (usar si hubo derrame, fatal, heridos de carácter grave o daños a la propiedad de Metropistas)</div> <!-- Nueva pestaña -->
+        <div class="tab-header" data-tab="finalReport">Reporte Final (usar si hubo derrame, fatal, heridos de carácter grave o daños a la propiedad de Metropistas)</div>
+        <div class="tab-header" data-tab="embeddedSite">Embedded Site</div> <!-- New tab header -->
     </div>
     <div class="tab-content active" id="report">
         <form id="crashForm">
@@ -426,6 +433,9 @@
         </form>
         <h2>Reporte Final</h2>
         <p id="finalReportOutput"></p>
+    </div>
+    <div class="tab-content" id="embeddedSite">
+        <iframe src="https://lbs.m2mgps.net/v2" title="Embedded Site"></iframe> <!-- Embedded site -->
     </div>
     <script src="script.js"></script>
 </body>
