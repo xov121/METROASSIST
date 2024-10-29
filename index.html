@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Action Plan Assistant</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+      <h1>¿Desea reportar alguna situación?</h1>
+      <div class="options">
+        <button class="option-button" id="reportar-tapado-btn">Reportar Tapado Temporero de Hoyo</button>
+        <button class="option-button" id="reportar-mantenimiento-btn">Reportar Mantenimiento</button>
+        <button class="option-button" id="roadside-assistance-btn">Roadside Assistance</button>
+        <button class="option-button" id="reportar-218-btn">218 (Derrames, daños o grave/fatal)</button>
+      </div>
+    </div>
+
+    <!-- Reportar 218 Page -->
+    <div id="reportar-218-page" class="page">
+      <h2>Reporte 218 (Derrames, daños o grave/fatal)</h2>
+      <form id="form-218">
+        <!-- Fecha -->
+        <div class="input-group">
+          <label for="fecha"><strong>Fecha:</strong></label>
+          <input type="date" id="fecha" name="fecha" required>
+        </div>
+        <!-- Operador -->
+        <div class="input-group">
+          <label for="operador"><strong>Operador:</strong></label>
+          <input type="text" id="operador" name="operador" required>
+        </div>
+        <!-- Hora llegada -->
+        <div class="input-group">
+          <label for="hora-llegada"><strong>Hora llegada:</strong></label>
+          <input type="time" id="hora-llegada" name="hora-llegada" required>
+        </div>
+        <!-- Hora terminado -->
+        <div class="input-group">
+          <label for="hora-terminado"><strong>Hora terminado:</strong></label>
+          <input type="time" id="hora-terminado" name="hora-terminado" required>
+        </div>
+
+        <!-- Tipo de Accidente -->
+        <div class="input-group">
+          <label for="tipo-accidente"><strong>Tipo de Accidente:</strong></label>
+          <select id="tipo-accidente" name="tipo-accidente" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Peatón">Peatón</option>
+            <option value="Regular">Regular</option>
+            <option value="Motora">Motora</option>
+            <option value="Vehículo pesado">Vehículo pesado</option>
+          </select>
+        </div>
+
+        <!-- Autopista -->
+        <div class="input-group">
+          <label for="autopista-218"><strong>Autopista:</strong></label>
+          <select id="autopista-218" name="autopista-218" required>
+            <option value="">Selecciona una autopista</option>
+            <option value="PR-22">PR-22</option>
+            <option value="PR-5">PR-5</option>
+            <option value="PR-20">PR-20</option>
+            <option value="PR-52">PR-52</option>
+            <option value="PR-53">PR-53</option>
+            <option value="PR-66">PR-66</option>
+            <option value="Puente Teodoro Moscoso">Puente Teodoro Moscoso</option>
+          </select>
+        </div>
+
+        <!-- Km -->
+        <div class="input-group">
+          <label for="km-218"><strong>Km:</strong></label>
+          <input type="number" id="km-218" name="km-218" step="0.1" required>
+        </div>
+
+        <!-- Localización -->
+        <div class="input-group">
+          <label for="localizacion"><strong>Localización:</strong></label>
+          <select id="localizacion" name="localizacion" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Norte">Norte</option>
+            <option value="Sur">Sur</option>
+            <option value="Este">Este</option>
+            <option value="Oeste">Oeste</option>
+          </select>
+        </div>
+
+        <!-- Situación Climatológica -->
+        <div class="input-group">
+          <label for="situacion-climatologica"><strong>Situación Climatológica:</strong></label>
+          <select id="situacion-climatologica" name="situacion-climatologica" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Pavimento seco">Pavimento seco</option>
+            <option value="Pavimento mojado">Pavimento mojado</option>
+          </select>
+        </div>
+
+        <!-- Vehículos -->
+        <div id="vehiculos-container">
+          <!-- Vehículo 1 -->
+          <div class="vehiculo" id="vehiculo-1">
+            <h3><strong>Vehículo 1</strong></h3>
+            <div class="input-group">
+              <label for="marca-1">Marca:</label>
+              <input type="text" id="marca-1" name="marca-1" required>
+            </div>
+            <div class="input-group">
+              <label for="modelo-1">Modelo:</label>
+              <input type="text" id="modelo-1" name="modelo-1" required>
+            </div>
+            <div class="input-group">
+              <label for="color-1">Color:</label>
+              <input type="text" id="color-1" name="color-1" required>
+            </div>
+            <div class="input-group">
+              <label for="anio-1">Año:</label>
+              <input type="number" id="anio-1" name="anio-1" required>
+            </div>
+            <div class="input-group">
+              <label for="tablilla-1">Tablilla:</label>
+              <input type="text" id="tablilla-1" name="tablilla-1" required>
+            </div>
+            <div class="input-group">
+              <label for="conductor-1">Conductor:</label>
+              <input type="text" id="conductor-1" name="conductor-1" required>
+            </div>
+            <div class="input-group">
+              <label for="licencia-1">Licencia:</label>
+              <input type="text" id="licencia-1" name="licencia-1" required>
+            </div>
+            <div class="input-group">
+              <label for="telefono-1">Teléfono:</label>
+              <input type="tel" id="telefono-1" name="telefono-1" required>
+            </div>
+            <div class="input-group">
+              <label for="direccion-1">Dirección:</label>
+              <input type="text" id="direccion-1" name="direccion-1" required>
+            </div>
+          </div>
+
+          <!-- Vehículo 2 (Optional) -->
+          <div class="vehiculo" id="vehiculo-2" style="display: none;">
+            <h3><strong>Vehículo 2</strong> <button type="button" class="remove-vehiculo-button" data-vehiculo="2">Eliminar</button></h3>
+            <!-- Same fields as Vehículo 1 -->
+            <div class="input-group">
+              <label for="marca-2">Marca:</label>
+              <input type="text" id="marca-2" name="marca-2">
+            </div>
+            <!-- [Rest of the fields] -->
+            <!-- Similar to Vehículo 1 fields -->
+            <!-- Include all fields as per Vehículo 1 -->
+          </div>
+
+          <!-- Vehículo 3 (Optional) -->
+          <div class="vehiculo" id="vehiculo-3" style="display: none;">
+            <h3><strong>Vehículo 3</strong> <button type="button" class="remove-vehiculo-button" data-vehiculo="3">Eliminar</button></h3>
+            <!-- Same fields as Vehículo 1 -->
+            <div class="input-group">
+              <label for="marca-3">Marca:</label>
+              <input type="text" id="marca-3" name="marca-3">
+            </div>
+            <!-- [Rest of the fields] -->
+            <!-- Similar to Vehículo 1 fields -->
+            <!-- Include all fields as per Vehículo 1 -->
+          </div>
+        </div>
+
+        <!-- Buttons to Add/Remove Vehículos -->
+        <div class="input-group">
+          <button type="button" id="add-vehiculo-btn" class="add-button">Agregar Vehículo</button>
+        </div>
+
+        <!-- Servicios adicionales -->
+        <h3><strong>Servicios adicionales</strong></h3>
+        <div class="input-group">
+          <label for="numero-querella">Número de Querella:</label>
+          <input type="text" id="numero-querella" name="numero-querella" required>
+        </div>
+        <div class="input-group">
+          <label for="nombre-policia">Nombre Policía:</label>
+          <input type="text" id="nombre-policia" name="nombre-policia" required>
+        </div>
+        <div class="input-group">
+          <label for="placa">Placa:</label>
+          <input type="text" id="placa" name="placa" required>
+        </div>
+        <div class="input-group">
+          <label for="cuartel">Cuartel:</label>
+          <input type="text" id="cuartel" name="cuartel" required>
+        </div>
+
+        <!-- Servicios Select -->
+        <div class="input-group">
+          <label for="bombero">Bombero:</label>
+          <select id="bombero" name="bombero" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <!-- Similar select fields for other services -->
+        <!-- Ambulancia -->
+        <div class="input-group">
+          <label for="ambulancia">Ambulancia:</label>
+          <select id="ambulancia" name="ambulancia" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <!-- Grúa -->
+        <div class="input-group">
+          <label for="grua">Grúa:</label>
+          <select id="grua" name="grua" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <!-- Junta de Calidad Ambiental -->
+        <div class="input-group">
+          <label for="jca">Junta de Calidad Ambiental:</label>
+          <select id="jca" name="jca" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <!-- Comisión de Servicio Público -->
+        <div class="input-group">
+          <label for="csp">Comisión de Servicio Público:</label>
+          <select id="csp" name="csp" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <!-- Otro (Optional) -->
+        <div class="input-group">
+          <label for="otro-servicio">Otro:</label>
+          <input type="text" id="otro-servicio" name="otro-servicio">
+        </div>
+
+        <!-- Descripción -->
+        <h3><strong>Descripción</strong></h3>
+        <!-- Causa -->
+        <div class="input-group">
+          <label for="causa">Causa:</label>
+          <input type="text" id="causa" name="causa" required>
+        </div>
+        <!-- Daños a la propiedad -->
+        <div class="input-group">
+          <label for="danos-propiedad">Daños a la propiedad:</label>
+          <select id="danos-propiedad" name="danos-propiedad" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <!-- Especificar daños si es "Si" -->
+        <div class="input-group" id="especificar-danos-group" style="display: none;">
+          <label for="especificar-danos">Especificar:</label>
+          <input type="text" id="especificar-danos" name="especificar-danos">
+        </div>
+        <!-- Fatal -->
+        <div class="input-group">
+          <label for="fatal">Fatal:</label>
+          <select id="fatal" name="fatal" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <!-- Cantidad de fatales si es "Si" -->
+        <div class="input-group" id="cantidad-fatal-group" style="display: none;">
+          <label for="cantidad-fatal">Cantidad:</label>
+          <input type="number" id="cantidad-fatal" name="cantidad-fatal" min="1">
+        </div>
+        <!-- Heridos -->
+        <div class="input-group">
+          <label for="heridos">Heridos:</label>
+          <select id="heridos" name="heridos" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <!-- Cantidad de heridos si es "Si" -->
+        <div class="input-group" id="cantidad-heridos-group" style="display: none;">
+          <label for="cantidad-heridos">Cantidad:</label>
+          <input type="number" id="cantidad-heridos" name="cantidad-heridos" min="1">
+        </div>
+        <!-- Derrame -->
+        <div class="input-group">
+          <label for="derrame">Derrame:</label>
+          <select id="derrame" name="derrame" required>
+            <option value="">Selecciona una opción</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <!-- Absorbente utilizado si hay derrame -->
+        <div class="input-group" id="absorbente-group" style="display: none;">
+          <label for="absorbente-utilizado">Absorbente utilizado:</label>
+          <input type="text" id="absorbente-utilizado" name="absorbente-utilizado">
+        </div>
+        <!-- Otro (Optional) -->
+        <div class="input-group">
+          <label for="otro-descripcion">Otro:</label>
+          <input type="text" id="otro-descripcion" name="otro-descripcion">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-button">Generar Reporte</button>
+      </form>
+
+      <!-- Generated Report Display -->
+      <div id="generated-report-218" class="generated-email" style="display: none;">
+        <h3>Reporte Generado:</h3>
+        <textarea id="report-content-218" readonly></textarea>
+        <button id="copy-report-btn-218" class="copy-button">Copiar Reporte</button>
+      </div>
+
+      <!-- Back Button -->
+      <button id="back-to-home-btn-218" class="back-button">Volver al Inicio</button>
+    </div>
+    
+      <!-- Reportar Tapado Page -->
+    <div id="reportar-tapado-page" class="page">
+      <h2>Reportar Tapado Temporero de Hoyo</h2>
+      <form id="tapado-form">
+        <!-- Hora -->
+        <div class="input-group">
+          <label for="hora-tapado">Hora (12 horas):</label>
+          <input type="time" id="hora-tapado" name="hora" required>
+        </div>
+
+        <!-- Autopista -->
+        <div class="input-group">
+          <label for="autopista-tapado">Autopista:</label>
+          <select id="autopista-tapado" name="autopista-tapado" required>
+            <option value="">Selecciona una autopista</option>
+            <option value="PR-5">PR-5</option>
+            <option value="PR-20">PR-20</option>
+            <option value="PR-22">PR-22</option>
+            <option value="PR-52">PR-52</option>
+            <option value="PR-53">PR-53</option>
+            <option value="PR-66">PR-66</option>
+            <option value="PTM">PTM</option>
+          </select>
+        </div>
+
+        <!-- Patrullero/a -->
+        <div class="input-group">
+          <label>Patrullero/a:</label>
+          <div id="patrulleros-container">
+            <div class="patrullero">
+              <input type="text" name="nombre-patrullero" placeholder="Nombre Patrullero/a" required>
+              <select name="unidad" required>
+                <option value="">Unidad</option>
+                <script>
+                  for (let i = 1; i <= 27; i++) {
+                    const unitNumber = i.toString().padStart(2, '0');
+                    document.write(`<option value="P-${unitNumber}">P-${unitNumber}</option>`);
+                  }
+                </script>
+              </select>
+              <button type="button" class="remove-patrullero-button">Eliminar</button>
+            </div>
+          </div>
+          <button type="button" id="add-patrullero-btn" class="add-button">Agregar Otro Patrullero/a</button>
+        </div>
+
+        <!-- Carril -->
+        <div class="input-group">
+          <label for="lane">Carril:</label>
+          <input type="text" id="lane" name="lane" placeholder="Ejemplo: Derecho y central" required>
+        </div>
+
+        <!-- Kilómetro -->
+        <div class="input-group">
+          <label for="kilometer">Kilómetro:</label>
+          <input type="number" id="kilometer" name="kilometer" min="0" step="0.1" required>
+        </div>
+
+        <!-- Número de Sacos de Asfalto Frío -->
+        <div class="input-group">
+          <label for="sacos">Número de Sacos de Asfalto Frío:</label>
+          <input type="number" id="sacos" name="sacos" min="0" required>
+        </div>
+
+        <!-- Dirección -->
+        <div class="input-group">
+          <label for="direction">Dirección:</label>
+          <select id="direction" name="direction" required>
+            <option value="">Selecciona una dirección</option>
+            <option value="Norte">Norte</option>
+            <option value="N/B">N/B</option>
+            <option value="Sur">Sur</option>
+            <option value="S/B">S/B</option>
+            <option value="Este">Este</option>
+            <option value="E/B">E/B</option>
+            <option value="Oeste">Oeste</option>
+            <option value="W/B">W/B</option>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-button">Generar Email</button>
+      </form>
+
+      <!-- Generated Email Display -->
+      <div id="generated-email" class="generated-email" style="display: none;">
+        <h3>Email Generado:</h3>
+        <textarea id="email-content" readonly></textarea>
+        <button id="copy-email-btn" class="copy-button">Copiar Email</button>
+      </div>
+
+      <!-- Back Button -->
+      <button id="back-to-home-btn" class="back-button">Volver al Inicio</button>
+    </div>
+
+    <!-- Reportar Mantenimiento Page -->
+    <div id="reportar-mantenimiento-page" class="page">
+      <!-- [Content remains the same as before] -->
+      <h2>Cerraron algun carril o autopista?</h2>
+      <div class="options">
+        <button class="option-button" id="ya-cerraron-btn">Ya cerraron</button>
+        <button class="option-button" id="no-han-cerrado-btn">No han cerrado, cerrarán</button>
+        <button class="option-button" id="no-van-a-cerrar-btn">No van a cerrar (en movimiento, en pórtico, etc)</button>
+      </div>
+      <button id="back-to-home-btn-2" class="back-button">Volver al Inicio</button>
+    </div>
+
+    <!-- Ya Cerraron Page -->
+    <div id="ya-cerraron-page" class="page">
+      <!-- [Content remains the same as before] -->
+      <h2>Ya Cerraron</h2>
+      <div class="options">
+        <button class="option-button" id="un-carril-btn">Un (1) Carril</button>
+        <!-- [Other options as before, some marked as Coming Soon] -->
+        <button id="back-to-reportar-mantenimiento-btn" class="back-button">Volver</button>
+      </div>
+    </div>
+
+    <!-- Un (1) Carril Form Page -->
+    <div id="un-carril-form-page" class="page">
+      <!-- [Content remains the same as before, ensure IDs are unique] -->
+      <h2>Un (1) Carril</h2>
+      <form id="un-carril-form">
+        <!-- Autopista -->
+        <div class="input-group">
+          <label for="autopista">Autopista:</label>
+          <select id="autopista" name="autopista" required>
+            <option value="">Selecciona una autopista</option>
+            <option value="PR-5">PR-5</option>
+            <option value="PR-20">PR-20</option>
+            <option value="PR-22">PR-22</option>
+            <option value="PR-52">PR-52</option>
+            <option value="PR-53">PR-53</option>
+            <option value="PR-66">PR-66</option>
+            <option value="PTM">PTM</option>
+          </select>
+        </div>
+        <!-- Kilómetro -->
+        <div class="input-group">
+          <label for="km">Kilómetro:</label>
+          <input type="number" id="km" name="km" min="0" step="0.1" required>
+        </div>
+        <!-- Dirección -->
+        <div class="input-group">
+          <label for="direccion">Dirección:</label>
+          <select id="direccion" name="direccion" required>
+            <option value="">Selecciona una dirección</option>
+            <option value="Norte">Norte</option>
+            <option value="N/B">N/B</option>
+            <option value="Sur">Sur</option>
+            <option value="S/B">S/B</option>
+            <option value="Este">Este</option>
+            <option value="E/B">E/B</option>
+            <option value="Oeste">Oeste</option>
+            <option value="W/B">W/B</option>
+          </select>
+        </div>
+        <!-- Hora -->
+        <div class="input-group">
+          <label for="hora-un-carril">Hora (12 horas):</label>
+          <input type="time" id="hora-un-carril" name="hora" required>
+        </div>
+        <!-- Nombre de Contratista -->
+        <div class="input-group">
+          <label for="nombre-contratista">Nombre de Contratista:</label>
+          <input type="text" id="nombre-contratista" name="nombre-contratista" required>
+        </div>
+        <!-- Compañía -->
+        <div class="input-group">
+          <label for="compania">Compañía:</label>
+          <input type="text" id="compania" name="compania" required>
+        </div>
+        <!-- Número de Teléfono -->
+        <div class="input-group">
+          <label for="telefono">Número de Teléfono:</label>
+          <input type="tel" id="telefono" name="telefono" required>
+        </div>
+        <!-- Carril1 -->
+        <div class="input-group">
+          <label for="carril1">Carril:</label>
+          <select id="carril1" name="carril1" required>
+            <option value="">Selecciona un carril</option>
+            <option value="izquierdo">Izquierdo</option>
+            <option value="central">Central</option>
+            <option value="derecho">Derecho</option>
+          </select>
+        </div>
+        <!-- Descripción del Trabajo -->
+        <div class="input-group">
+          <label for="descripcion-trabajo">Descripción del Trabajo:</label>
+          <textarea id="descripcion-trabajo" name="descripcion-trabajo" required></textarea>
+        </div>
+        <!-- Submit Button -->
+        <button type="submit" class="submit-button">Generar Email</button>
+      </form>
+      <!-- Generated Email Display -->
+      <div id="generated-email-un-carril" class="generated-email" style="display: none;">
+        <h3>Email Generado:</h3>
+        <textarea id="email-content-un-carril" readonly></textarea>
+        <button id="copy-email-btn-un-carril" class="copy-button">Copiar Email</button>
+      </div>
+      <button id="back-to-ya-cerraron-btn-2" class="back-button">Volver</button>
+    </div>
+
+    <!-- Roadside Assistance Page -->
+    <div id="roadside-assistance-page" class="page">
+      <h2>Roadside Assistance</h2>
+      <p>Esta sección está en desarrollo.</p>
+      <button id="back-to-home-btn-3" class="back-button">Volver al Inicio</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
