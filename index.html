@@ -16,6 +16,8 @@
         <button class="option-button" id="reportar-mantenimiento-btn">Reportar Mantenimiento</button>
         <button class="option-button" id="roadside-assistance-btn">Roadside Assistance</button>
         <button class="option-button" id="reportar-218-btn">218 (Derrames, daños o grave/fatal)</button>
+        <!-- New Button -->
+        <button class="option-button" id="ver-for218-guardados-btn">Ver FOR218 guardados</button>
       </div>
     </div>
 
@@ -141,32 +143,6 @@
               <input type="text" id="direccion-1" name="direccion-1" required>
             </div>
           </div>
-
-          <!-- Vehículo 2 (Optional) -->
-          <div class="vehiculo" id="vehiculo-2" style="display: none;">
-            <h3><strong>Vehículo 2</strong> <button type="button" class="remove-vehiculo-button" data-vehiculo="2">Eliminar</button></h3>
-            <!-- Same fields as Vehículo 1 -->
-            <div class="input-group">
-              <label for="marca-2">Marca:</label>
-              <input type="text" id="marca-2" name="marca-2">
-            </div>
-            <!-- [Rest of the fields] -->
-            <!-- Similar to Vehículo 1 fields -->
-            <!-- Include all fields as per Vehículo 1 -->
-          </div>
-
-          <!-- Vehículo 3 (Optional) -->
-          <div class="vehiculo" id="vehiculo-3" style="display: none;">
-            <h3><strong>Vehículo 3</strong> <button type="button" class="remove-vehiculo-button" data-vehiculo="3">Eliminar</button></h3>
-            <!-- Same fields as Vehículo 1 -->
-            <div class="input-group">
-              <label for="marca-3">Marca:</label>
-              <input type="text" id="marca-3" name="marca-3">
-            </div>
-            <!-- [Rest of the fields] -->
-            <!-- Similar to Vehículo 1 fields -->
-            <!-- Include all fields as per Vehículo 1 -->
-          </div>
         </div>
 
         <!-- Buttons to Add/Remove Vehículos -->
@@ -202,8 +178,6 @@
             <option value="No">No</option>
           </select>
         </div>
-        <!-- Similar select fields for other services -->
-        <!-- Ambulancia -->
         <div class="input-group">
           <label for="ambulancia">Ambulancia:</label>
           <select id="ambulancia" name="ambulancia" required>
@@ -212,7 +186,6 @@
             <option value="No">No</option>
           </select>
         </div>
-        <!-- Grúa -->
         <div class="input-group">
           <label for="grua">Grúa:</label>
           <select id="grua" name="grua" required>
@@ -221,7 +194,6 @@
             <option value="No">No</option>
           </select>
         </div>
-        <!-- Junta de Calidad Ambiental -->
         <div class="input-group">
           <label for="jca">Junta de Calidad Ambiental:</label>
           <select id="jca" name="jca" required>
@@ -230,7 +202,6 @@
             <option value="No">No</option>
           </select>
         </div>
-        <!-- Comisión de Servicio Público -->
         <div class="input-group">
           <label for="csp">Comisión de Servicio Público:</label>
           <select id="csp" name="csp" required>
@@ -328,8 +299,8 @@
       <!-- Back Button -->
       <button id="back-to-home-btn-218" class="back-button">Volver al Inicio</button>
     </div>
-    
-      <!-- Reportar Tapado Page -->
+
+    <!-- Reportar Tapado Page -->
     <div id="reportar-tapado-page" class="page">
       <h2>Reportar Tapado Temporero de Hoyo</h2>
       <form id="tapado-form">
@@ -358,19 +329,7 @@
         <div class="input-group">
           <label>Patrullero/a:</label>
           <div id="patrulleros-container">
-            <div class="patrullero">
-              <input type="text" name="nombre-patrullero" placeholder="Nombre Patrullero/a" required>
-              <select name="unidad" required>
-                <option value="">Unidad</option>
-                <script>
-                  for (let i = 1; i <= 27; i++) {
-                    const unitNumber = i.toString().padStart(2, '0');
-                    document.write(`<option value="P-${unitNumber}">P-${unitNumber}</option>`);
-                  }
-                </script>
-              </select>
-              <button type="button" class="remove-patrullero-button">Eliminar</button>
-            </div>
+            <!-- Patrullero input fields will be added here -->
           </div>
           <button type="button" id="add-patrullero-btn" class="add-button">Agregar Otro Patrullero/a</button>
         </div>
@@ -426,8 +385,7 @@
 
     <!-- Reportar Mantenimiento Page -->
     <div id="reportar-mantenimiento-page" class="page">
-      <!-- [Content remains the same as before] -->
-      <h2>Cerraron algun carril o autopista?</h2>
+      <h2>Cerraron algún carril o autopista?</h2>
       <div class="options">
         <button class="option-button" id="ya-cerraron-btn">Ya cerraron</button>
         <button class="option-button" id="no-han-cerrado-btn">No han cerrado, cerrarán</button>
@@ -438,18 +396,16 @@
 
     <!-- Ya Cerraron Page -->
     <div id="ya-cerraron-page" class="page">
-      <!-- [Content remains the same as before] -->
       <h2>Ya Cerraron</h2>
       <div class="options">
         <button class="option-button" id="un-carril-btn">Un (1) Carril</button>
-        <!-- [Other options as before, some marked as Coming Soon] -->
+        <p>(Más opciones próximamente)</p>
         <button id="back-to-reportar-mantenimiento-btn" class="back-button">Volver</button>
       </div>
     </div>
 
     <!-- Un (1) Carril Form Page -->
     <div id="un-carril-form-page" class="page">
-      <!-- [Content remains the same as before, ensure IDs are unique] -->
       <h2>Un (1) Carril</h2>
       <form id="un-carril-form">
         <!-- Autopista -->
@@ -539,7 +495,28 @@
       <p>Esta sección está en desarrollo.</p>
       <button id="back-to-home-btn-3" class="back-button">Volver al Inicio</button>
     </div>
+
+    <!-- Ver FOR218 Guardados Page -->
+    <div id="ver-for218-guardados-page" class="page">
+      <h2>FOR218 Guardados</h2>
+      <ul id="for218-list">
+        <!-- List of saved FOR218 reports will be populated here -->
+      </ul>
+      <button id="back-to-home-btn-4" class="back-button">Volver al Inicio</button>
+    </div>
+
+    <!-- Report Modal -->
+    <div id="report-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-modal" class="close-button">&times;</span>
+        <h3>Detalle del Reporte</h3>
+        <textarea id="modal-report-content" readonly></textarea>
+        <button id="download-report-btn" class="download-button">Descargar Reporte</button>
+      </div>
+    </div>
+
   </div>
+  <!-- End of #app div -->
 
   <script src="script.js"></script>
 </body>

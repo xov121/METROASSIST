@@ -30,7 +30,8 @@ body {
   display: block; /* Show the active page */
 }
 
-h1, h2 {
+h1,
+h2 {
   color: #333;
 }
 
@@ -61,6 +62,7 @@ h1, h2 {
   align-items: flex-start;
   margin-bottom: 15px;
   width: 100%;
+  text-align: left;
 }
 
 .input-group label {
@@ -118,11 +120,12 @@ h1, h2 {
 
 .generated-email textarea {
   width: 100%;
-  height: 200px;
+  min-height: 200px;
   padding: 10px;
   resize: none;
   border: 1px solid #ccc;
   border-radius: 5px;
+  height: auto;
 }
 
 .copy-button {
@@ -221,33 +224,99 @@ h1, h2 {
   background-color: #c82333;
 }
 
-/* Add Button */
-.add-button {
-  margin-top: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 15px;
-  cursor: pointer;
-}
-
-.add-button:hover {
-  background-color: #0056b3;
-}
-
-/* Input Groups */
-.input-group {
-  margin-bottom: 15px;
+/* Styles for the report list */
+#for218-list {
+  list-style-type: none;
+  padding: 0;
   text-align: left;
 }
 
-.input-group label {
-  font-weight: bold;
+#for218-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
 }
 
-/* Generated Report Styles */
-.generated-email textarea {
-  height: auto;
-  min-height: 200px;
+#for218-list li a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#for218-list li a:hover {
+  text-decoration: underline;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto; /* Centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+}
+
+.close-button {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+}
+
+.modal-content textarea {
+  width: 100%;
+  height: 300px;
+  resize: none;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.download-button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background-color: #ffc107;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.download-button:hover {
+  background-color: #e0a800;
 }

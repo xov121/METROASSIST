@@ -8,11 +8,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const roadsideAssistancePage = document.getElementById('roadside-assistance-page');
   const yaCerraronPage = document.getElementById('ya-cerraron-page');
   const unCarrilFormPage = document.getElementById('un-carril-form-page');
+  const reportar218Page = document.getElementById('reportar-218-page');
+  const verFor218GuardadosPage = document.getElementById('ver-for218-guardados-page');
 
   // Buttons on Home Page
   const reportarTapadoBtn = document.getElementById('reportar-tapado-btn');
   const reportarMantenimientoBtn = document.getElementById('reportar-mantenimiento-btn');
   const roadsideAssistanceBtn = document.getElementById('roadside-assistance-btn');
+  const reportar218Btn = document.getElementById('reportar-218-btn');
+  const verFor218GuardadosBtn = document.getElementById('ver-for218-guardados-btn');
+
+  // Modal Elements
+  const reportModal = document.getElementById('report-modal');
+  const closeModalBtn = document.getElementById('close-modal');
+  const modalReportContent = document.getElementById('modal-report-content');
+  const downloadReportBtn = document.getElementById('download-report-btn');
 
   // Buttons on Reportar Mantenimiento Page
   const yaCerraronBtn = document.getElementById('ya-cerraron-btn');
@@ -45,6 +55,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // Back to Home Button on Roadside Assistance Page
   const backToHomeBtn3 = document.getElementById('back-to-home-btn-3');
 
+  // New Elements for Reportar 218
+  const form218 = document.getElementById('form-218');
+  const backToHomeBtn218 = document.getElementById('back-to-home-btn-218');
+  const generatedReportDiv218 = document.getElementById('generated-report-218');
+  const reportContent218 = document.getElementById('report-content-218');
+  const copyReportBtn218 = document.getElementById('copy-report-btn-218');
+
+  // Vehículos
+  const vehiculosContainer = document.getElementById('vehiculos-container');
+  const addVehiculoBtn = document.getElementById('add-vehiculo-btn');
+  let vehiculoCount = 1; // Start with Vehículo 1
+
+  // New Elements for Ver FOR218 Guardados
+  const for218List = document.getElementById('for218-list');
+  const backToHomeBtn4 = document.getElementById('back-to-home-btn-4');
+
   // Event Listeners for Navigation Buttons
   reportarTapadoBtn.addEventListener('click', () => {
     showPage(reportarTapadoPage);
@@ -58,12 +84,30 @@ document.addEventListener('DOMContentLoaded', () => {
     showPage(roadsideAssistancePage);
   });
 
+  reportar218Btn.addEventListener('click', () => {
+    showPage(reportar218Page);
+  });
+
+  verFor218GuardadosBtn.addEventListener('click', () => {
+    showPage(verFor218GuardadosPage);
+    displaySavedFor218Reports();
+  });
+
   backToHomeBtn2.addEventListener('click', () => {
     showPage(homePage);
   });
 
   backToHomeBtn3.addEventListener('click', () => {
     showPage(homePage);
+  });
+
+  backToHomeBtn4.addEventListener('click', () => {
+    showPage(homePage);
+  });
+
+  backToHomeBtn218.addEventListener('click', () => {
+    showPage(homePage);
+    resetForm218();
   });
 
   yaCerraronBtn.addEventListener('click', () => {
@@ -215,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (patrulleros.length > 1) {
       const nombresUnidades = patrulleros.map((p) => `${p.nombre} (${p.unidad})`);
       const patrullerosList = nombresUnidades.join(', ').replace(/, ([^,]*)$/, ' y $1');
-      email += `los patrulleros ${patrullerosList} realizaron una reparación temporera de hoyo en el carril ${lane} en el km ${kilometer} en dirección ${direction}, hacia ${sig_pueblo}. `;
+      email += `Los patrulleros ${patrullerosList} realizaron una reparación temporera de hoyo en el carril ${lane} en el km ${kilometer} en dirección ${direction}, hacia ${sig_pueblo}. `;
       email += `Los patrulleros utilizaron ${sacos} sacos de asfalto frío.`;
     }
 
@@ -363,237 +407,312 @@ document.addEventListener('DOMContentLoaded', () => {
     patrullerosContainer.appendChild(div);
   }
 
-   // New Elements for Reportar 218
-   const reportar218Btn = document.getElementById('reportar-218-btn');
-   const reportar218Page = document.getElementById('reportar-218-page');
-   const form218 = document.getElementById('form-218');
-   const backToHomeBtn218 = document.getElementById('back-to-home-btn-218');
-   const generatedReportDiv218 = document.getElementById('generated-report-218');
-   const reportContent218 = document.getElementById('report-content-218');
-   const copyReportBtn218 = document.getElementById('copy-report-btn-218');
- 
-   // Vehículos
-   const vehiculosContainer = document.getElementById('vehiculos-container');
-   const addVehiculoBtn = document.getElementById('add-vehiculo-btn');
-   let vehiculoCount = 1; // Start with Vehículo 1
- 
-   // Event Listener for Navigation Button
-   reportar218Btn.addEventListener('click', () => {
-     showPage(reportar218Page);
-   });
- 
-   backToHomeBtn218.addEventListener('click', () => {
-     showPage(homePage);
-     resetForm218();
-   });
- 
-   // Handle Form Submission for 218
-   form218.addEventListener('submit', (e) => {
-     e.preventDefault();
-     generateReport218();
-   });
- 
-   // Copy Report Button
-   copyReportBtn218.addEventListener('click', () => {
-     reportContent218.select();
-     reportContent218.setSelectionRange(0, 99999); // For mobile devices
-     document.execCommand('copy');
-     alert('Reporte copiado al portapapeles!');
-   });
- 
-   // Add Vehículo Button
-   addVehiculoBtn.addEventListener('click', addVehiculo);
- 
-   // Remove Vehículo Buttons
-   vehiculosContainer.addEventListener('click', function (event) {
-     if (event.target.classList.contains('remove-vehiculo-button')) {
-       const vehiculoNum = event.target.getAttribute('data-vehiculo');
-       document.getElementById(`vehiculo-${vehiculoNum}`).remove();
-     }
-   });
- 
-   // Show/Hide Additional Fields Based on Selections
-   document.getElementById('danos-propiedad').addEventListener('change', (e) => {
-     const especificarDanosGroup = document.getElementById('especificar-danos-group');
-     especificarDanosGroup.style.display = e.target.value === 'Si' ? 'block' : 'none';
-   });
- 
-   document.getElementById('fatal').addEventListener('change', (e) => {
-     const cantidadFatalGroup = document.getElementById('cantidad-fatal-group');
-     cantidadFatalGroup.style.display = e.target.value === 'Si' ? 'block' : 'none';
-   });
- 
-   document.getElementById('heridos').addEventListener('change', (e) => {
-     const cantidadHeridosGroup = document.getElementById('cantidad-heridos-group');
-     cantidadHeridosGroup.style.display = e.target.value === 'Si' ? 'block' : 'none';
-   });
- 
-   document.getElementById('derrame').addEventListener('change', (e) => {
-     const absorbenteGroup = document.getElementById('absorbente-group');
-     absorbenteGroup.style.display = e.target.value === 'Si' ? 'block' : 'none';
-   });
- 
-   // Function to Add Vehículo
-   function addVehiculo() {
-     vehiculoCount++;
-     if (vehiculoCount > 3) {
-       alert('No se pueden agregar más de 3 vehículos.');
-       vehiculoCount = 3;
-       return;
-     }
- 
-     const vehiculoDiv = document.createElement('div');
-     vehiculoDiv.className = 'vehiculo';
-     vehiculoDiv.id = `vehiculo-${vehiculoCount}`;
-     vehiculoDiv.innerHTML = `
-       <h3><strong>Vehículo ${vehiculoCount}</strong> <button type="button" class="remove-vehiculo-button" data-vehiculo="${vehiculoCount}">Eliminar</button></h3>
-       <div class="input-group">
-         <label for="marca-${vehiculoCount}">Marca:</label>
-         <input type="text" id="marca-${vehiculoCount}" name="marca-${vehiculoCount}">
-       </div>
-       <!-- Include all fields as per Vehículo 1 -->
-       <!-- Modelo -->
-       <div class="input-group">
-         <label for="modelo-${vehiculoCount}">Modelo:</label>
-         <input type="text" id="modelo-${vehiculoCount}" name="modelo-${vehiculoCount}">
-       </div>
-       <!-- Color -->
-       <div class="input-group">
-         <label for="color-${vehiculoCount}">Color:</label>
-         <input type="text" id="color-${vehiculoCount}" name="color-${vehiculoCount}">
-       </div>
-       <!-- Año -->
-       <div class="input-group">
-         <label for="anio-${vehiculoCount}">Año:</label>
-         <input type="number" id="anio-${vehiculoCount}" name="anio-${vehiculoCount}">
-       </div>
-       <!-- Tablilla -->
-       <div class="input-group">
-         <label for="tablilla-${vehiculoCount}">Tablilla:</label>
-         <input type="text" id="tablilla-${vehiculoCount}" name="tablilla-${vehiculoCount}">
-       </div>
-       <!-- Conductor -->
-       <div class="input-group">
-         <label for="conductor-${vehiculoCount}">Conductor:</label>
-         <input type="text" id="conductor-${vehiculoCount}" name="conductor-${vehiculoCount}">
-       </div>
-       <!-- Licencia -->
-       <div class="input-group">
-         <label for="licencia-${vehiculoCount}">Licencia:</label>
-         <input type="text" id="licencia-${vehiculoCount}" name="licencia-${vehiculoCount}">
-       </div>
-       <!-- Teléfono -->
-       <div class="input-group">
-         <label for="telefono-${vehiculoCount}">Teléfono:</label>
-         <input type="tel" id="telefono-${vehiculoCount}" name="telefono-${vehiculoCount}">
-       </div>
-       <!-- Dirección -->
-       <div class="input-group">
-         <label for="direccion-${vehiculoCount}">Dirección:</label>
-         <input type="text" id="direccion-${vehiculoCount}" name="direccion-${vehiculoCount}">
-       </div>
-     `;
-     vehiculosContainer.appendChild(vehiculoDiv);
-     vehiculoDiv.style.display = 'block';
-   }
- 
-   // Function to Reset Form 218
-   function resetForm218() {
-     form218.reset();
-     // Remove Vehículo 2 and 3 if they exist
-     for (let i = 2; i <= 3; i++) {
-       const vehiculoDiv = document.getElementById(`vehiculo-${i}`);
-       if (vehiculoDiv) {
-         vehiculoDiv.remove();
-       }
-     }
-     vehiculoCount = 1;
-     generatedReportDiv218.style.display = 'none';
-     reportContent218.value = '';
-     // Hide conditional fields
-     document.getElementById('especificar-danos-group').style.display = 'none';
-     document.getElementById('cantidad-fatal-group').style.display = 'none';
-     document.getElementById('cantidad-heridos-group').style.display = 'none';
-     document.getElementById('absorbente-group').style.display = 'none';
-   }
- 
-   // Function to Generate Report 218
-   function generateReport218() {
-     // Collect all form data
-     const formData = new FormData(form218);
-     const data = {};
-     formData.forEach((value, key) => {
-       data[key] = value;
-     });
- 
-     // Construct the report content
-     let report = `Fecha: ${data['fecha']}\n`;
-     report += `Operador: ${data['operador']}\n`;
-     report += `Hora llegada: ${data['hora-llegada']}\n`;
-     report += `Hora terminado: ${data['hora-terminado']}\n\n`;
- 
-     report += `Tipo de Accidente: ${data['tipo-accidente']}\n`;
-     report += `Autopista: ${data['autopista-218']}\n`;
-     report += `Km: ${data['km-218']}\n`;
-     report += `Localización: ${data['localizacion']}\n`;
-     report += `Situación Climatológica: ${data['situacion-climatologica']}\n\n`;
- 
-     // Vehículos
-     for (let i = 1; i <= vehiculoCount; i++) {
-       if (document.getElementById(`vehiculo-${i}`)) {
-         report += `Vehículo ${i}\n`;
-         report += `Marca: ${data[`marca-${i}`] || 'N/A'}\n`;
-         report += `Modelo: ${data[`modelo-${i}`] || 'N/A'}\n`;
-         report += `Color: ${data[`color-${i}`] || 'N/A'}\n`;
-         report += `Año: ${data[`anio-${i}`] || 'N/A'}\n`;
-         report += `Tablilla: ${data[`tablilla-${i}`] || 'N/A'}\n`;
-         report += `Conductor: ${data[`conductor-${i}`] || 'N/A'}\n`;
-         report += `Licencia: ${data[`licencia-${i}`] || 'N/A'}\n`;
-         report += `Teléfono: ${data[`telefono-${i}`] || 'N/A'}\n`;
-         report += `Dirección: ${data[`direccion-${i}`] || 'N/A'}\n\n`;
-       }
-     }
- 
-     // Servicios adicionales
-     report += `Servicios adicionales\n`;
-     report += `Número de Querella: ${data['numero-querella']}\n`;
-     report += `Nombre Policía: ${data['nombre-policia']}\n`;
-     report += `Placa: ${data['placa']}\n`;
-     report += `Cuartel: ${data['cuartel']}\n\n`;
- 
-     report += `Bombero: ${data['bombero']}\n`;
-     report += `Ambulancia: ${data['ambulancia']}\n`;
-     report += `Grúa: ${data['grua']}\n`;
-     report += `Junta de Calidad Ambiental: ${data['jca']}\n`;
-     report += `Comisión de Servicio Público: ${data['csp']}\n`;
-     report += `Otro: ${data['otro-servicio'] || 'N/A'}\n\n`;
- 
-     // Descripción
-     report += `Descripción\n`;
-     report += `Causa: ${data['causa']}\n`;
-     report += `Daños a la propiedad: ${data['danos-propiedad']}\n`;
-     if (data['danos-propiedad'] === 'Si') {
-       report += `Especificar: ${data['especificar-danos']}\n`;
-     }
-     report += `Fatal: ${data['fatal']}\n`;
-     if (data['fatal'] === 'Si') {
-       report += `Cantidad: ${data['cantidad-fatal']}\n`;
-     }
-     report += `Heridos: ${data['heridos']}\n`;
-     if (data['heridos'] === 'Si') {
-       report += `Cantidad: ${data['cantidad-heridos']}\n`;
-     }
-     report += `Derrame: ${data['derrame']}\n`;
-     if (data['derrame'] === 'Si') {
-       report += `Absorbente utilizado: ${data['absorbente-utilizado']}\n`;
-     }
-     report += `Otro: ${data['otro-descripcion'] || 'N/A'}\n`;
- 
-     // Display the report
-     reportContent218.value = report;
-     generatedReportDiv218.style.display = 'block';
-   }
-
   // Initialize with one Patrullero input
   addPatrullero();
+
+  // Handle Form Submission for Reportar 218
+  form218.addEventListener('submit', (e) => {
+    e.preventDefault();
+    generateReport218();
+  });
+
+  // Copy Report Button
+  copyReportBtn218.addEventListener('click', () => {
+    reportContent218.select();
+    reportContent218.setSelectionRange(0, 99999); // For mobile devices
+    document.execCommand('copy');
+    alert('Reporte copiado al portapapeles!');
+  });
+
+  // Add Vehículo Button
+  addVehiculoBtn.addEventListener('click', addVehiculo);
+
+  // Remove Vehículo Buttons
+  vehiculosContainer.addEventListener('click', function (event) {
+    if (event.target.classList.contains('remove-vehiculo-button')) {
+      const vehiculoNum = event.target.getAttribute('data-vehiculo');
+      document.getElementById(`vehiculo-${vehiculoNum}`).remove();
+    }
+  });
+
+  // Show/Hide Additional Fields Based on Selections
+  document.getElementById('danos-propiedad').addEventListener('change', (e) => {
+    const especificarDanosGroup = document.getElementById('especificar-danos-group');
+    especificarDanosGroup.style.display = e.target.value === 'Si' ? 'block' : 'none';
+  });
+
+  document.getElementById('fatal').addEventListener('change', (e) => {
+    const cantidadFatalGroup = document.getElementById('cantidad-fatal-group');
+    cantidadFatalGroup.style.display = e.target.value === 'Si' ? 'block' : 'none';
+  });
+
+  document.getElementById('heridos').addEventListener('change', (e) => {
+    const cantidadHeridosGroup = document.getElementById('cantidad-heridos-group');
+    cantidadHeridosGroup.style.display = e.target.value === 'Si' ? 'block' : 'none';
+  });
+
+  document.getElementById('derrame').addEventListener('change', (e) => {
+    const absorbenteGroup = document.getElementById('absorbente-group');
+    absorbenteGroup.style.display = e.target.value === 'Si' ? 'block' : 'none';
+  });
+
+  // Function to Add Vehículo
+  function addVehiculo() {
+    vehiculoCount++;
+    if (vehiculoCount > 3) {
+      alert('No se pueden agregar más de 3 vehículos.');
+      vehiculoCount = 3;
+      return;
+    }
+
+    const vehiculoDiv = document.createElement('div');
+    vehiculoDiv.className = 'vehiculo';
+    vehiculoDiv.id = `vehiculo-${vehiculoCount}`;
+    vehiculoDiv.innerHTML = `
+      <h3><strong>Vehículo ${vehiculoCount}</strong> <button type="button" class="remove-vehiculo-button" data-vehiculo="${vehiculoCount}">Eliminar</button></h3>
+      <div class="input-group">
+        <label for="marca-${vehiculoCount}">Marca:</label>
+        <input type="text" id="marca-${vehiculoCount}" name="marca-${vehiculoCount}">
+      </div>
+      <!-- Include all fields as per Vehículo 1 -->
+      <!-- Modelo -->
+      <div class="input-group">
+        <label for="modelo-${vehiculoCount}">Modelo:</label>
+        <input type="text" id="modelo-${vehiculoCount}" name="modelo-${vehiculoCount}">
+      </div>
+      <!-- Color -->
+      <div class="input-group">
+        <label for="color-${vehiculoCount}">Color:</label>
+        <input type="text" id="color-${vehiculoCount}" name="color-${vehiculoCount}">
+      </div>
+      <!-- Año -->
+      <div class="input-group">
+        <label for="anio-${vehiculoCount}">Año:</label>
+        <input type="number" id="anio-${vehiculoCount}" name="anio-${vehiculoCount}">
+      </div>
+      <!-- Tablilla -->
+      <div class="input-group">
+        <label for="tablilla-${vehiculoCount}">Tablilla:</label>
+        <input type="text" id="tablilla-${vehiculoCount}" name="tablilla-${vehiculoCount}">
+      </div>
+      <!-- Conductor -->
+      <div class="input-group">
+        <label for="conductor-${vehiculoCount}">Conductor:</label>
+        <input type="text" id="conductor-${vehiculoCount}" name="conductor-${vehiculoCount}">
+      </div>
+      <!-- Licencia -->
+      <div class="input-group">
+        <label for="licencia-${vehiculoCount}">Licencia:</label>
+        <input type="text" id="licencia-${vehiculoCount}" name="licencia-${vehiculoCount}">
+      </div>
+      <!-- Teléfono -->
+      <div class="input-group">
+        <label for="telefono-${vehiculoCount}">Teléfono:</label>
+        <input type="tel" id="telefono-${vehiculoCount}" name="telefono-${vehiculoCount}">
+      </div>
+      <!-- Dirección -->
+      <div class="input-group">
+        <label for="direccion-${vehiculoCount}">Dirección:</label>
+        <input type="text" id="direccion-${vehiculoCount}" name="direccion-${vehiculoCount}">
+      </div>
+    `;
+    vehiculosContainer.appendChild(vehiculoDiv);
+    vehiculoDiv.style.display = 'block';
+  }
+
+  // Function to Reset Form 218
+  function resetForm218() {
+    form218.reset();
+    // Remove Vehículo 2 and 3 if they exist
+    for (let i = 2; i <= 3; i++) {
+      const vehiculoDiv = document.getElementById(`vehiculo-${i}`);
+      if (vehiculoDiv) {
+        vehiculoDiv.remove();
+      }
+    }
+    vehiculoCount = 1;
+    generatedReportDiv218.style.display = 'none';
+    reportContent218.value = '';
+    // Hide conditional fields
+    document.getElementById('especificar-danos-group').style.display = 'none';
+    document.getElementById('cantidad-fatal-group').style.display = 'none';
+    document.getElementById('cantidad-heridos-group').style.display = 'none';
+    document.getElementById('absorbente-group').style.display = 'none';
+  }
+
+  // Function to Generate Report 218
+  function generateReport218() {
+  // Collect all form data
+  const formData = new FormData(form218);
+  const data = {};
+  formData.forEach((value, key) => {
+    data[key] = value;
+  });
+
+  // Format the time fields to 12-hour format
+  const formattedHoraLlegada = formatTimeTo12Hour(data['hora-llegada']);
+  const formattedHoraTerminado = formatTimeTo12Hour(data['hora-terminado']);
+
+  // Construct the report content with formatted times
+  let report = `Fecha: ${data['fecha']}\n`;
+  report += `Operador: ${data['operador']}\n`;
+  report += `Hora llegada: ${formattedHoraLlegada}\n`;
+  report += `Hora terminado: ${formattedHoraTerminado}\n\n`;
+
+    report += `Tipo de Accidente: ${data['tipo-accidente']}\n`;
+    report += `Autopista: ${data['autopista-218']}\n`;
+    report += `Km: ${data['km-218']}\n`;
+    report += `Localización: ${data['localizacion']}\n`;
+    report += `Situación Climatológica: ${data['situacion-climatologica']}\n\n`;
+
+    // Vehículos
+    for (let i = 1; i <= vehiculoCount; i++) {
+      if (document.getElementById(`vehiculo-${i}`)) {
+        report += `Vehículo ${i}\n`;
+        report += `Marca: ${data[`marca-${i}`] || 'N/A'}\n`;
+        report += `Modelo: ${data[`modelo-${i}`] || 'N/A'}\n`;
+        report += `Color: ${data[`color-${i}`] || 'N/A'}\n`;
+        report += `Año: ${data[`anio-${i}`] || 'N/A'}\n`;
+        report += `Tablilla: ${data[`tablilla-${i}`] || 'N/A'}\n`;
+        report += `Conductor: ${data[`conductor-${i}`] || 'N/A'}\n`;
+        report += `Licencia: ${data[`licencia-${i}`] || 'N/A'}\n`;
+        report += `Teléfono: ${data[`telefono-${i}`] || 'N/A'}\n`;
+        report += `Dirección: ${data[`direccion-${i}`] || 'N/A'}\n\n`;
+      }
+    }
+
+    // Servicios adicionales
+    report += `Servicios adicionales\n`;
+    report += `Número de Querella: ${data['numero-querella']}\n`;
+    report += `Nombre Policía: ${data['nombre-policia']}\n`;
+    report += `Placa: ${data['placa']}\n`;
+    report += `Cuartel: ${data['cuartel']}\n\n`;
+
+    report += `Bombero: ${data['bombero']}\n`;
+    report += `Ambulancia: ${data['ambulancia']}\n`;
+    report += `Grúa: ${data['grua']}\n`;
+    report += `Junta de Calidad Ambiental: ${data['jca']}\n`;
+    report += `Comisión de Servicio Público: ${data['csp']}\n`;
+    report += `Otro: ${data['otro-servicio'] || 'N/A'}\n\n`;
+
+    // Descripción
+    report += `Descripción\n`;
+    report += `Causa: ${data['causa']}\n`;
+    report += `Daños a la propiedad: ${data['danos-propiedad']}\n`;
+    if (data['danos-propiedad'] === 'Si') {
+      report += `Especificar: ${data['especificar-danos']}\n`;
+    }
+    report += `Fatal: ${data['fatal']}\n`;
+    if (data['fatal'] === 'Si') {
+      report += `Cantidad: ${data['cantidad-fatal']}\n`;
+    }
+    report += `Heridos: ${data['heridos']}\n`;
+    if (data['heridos'] === 'Si') {
+      report += `Cantidad: ${data['cantidad-heridos']}\n`;
+    }
+    report += `Derrame: ${data['derrame']}\n`;
+    if (data['derrame'] === 'Si') {
+      report += `Absorbente utilizado: ${data['absorbente-utilizado']}\n`;
+    }
+    report += `Otro: ${data['otro-descripcion'] || 'N/A'}\n`;
+
+    // Generate a unique key based on highway, km, direction, and date
+    const reportKey = `FOR218_${data['autopista-218']}_${data['km-218'].replace('.', '-')}_${data['localizacion']}_${data['fecha'].replace(/-/g, '')}`;
+
+    // Create an object to store
+    const reportData = {
+      key: reportKey,
+      date: data['fecha'],
+      highway: data['autopista-218'],
+      km: data['km-218'],
+      direction: data['localizacion'],
+      content: report
+    };
+
+    // Save the report to localStorage
+    localStorage.setItem(reportKey, JSON.stringify(reportData));
+
+    // Display the report
+    reportContent218.value = report;
+    generatedReportDiv218.style.display = 'block';
+  }
+
+  // Function to Display Saved FOR218 Reports
+  function displaySavedFor218Reports() {
+    for218List.innerHTML = ''; // Clear existing list
+    const keys = Object.keys(localStorage);
+    const for218Keys = keys.filter(key => key.startsWith('FOR218_'));
+
+    if (for218Keys.length === 0) {
+      const noReportsItem = document.createElement('li');
+      noReportsItem.textContent = 'No hay FOR218 guardados.';
+      for218List.appendChild(noReportsItem);
+      return;
+    }
+
+    for218Keys.forEach(key => {
+      const reportData = JSON.parse(localStorage.getItem(key));
+      const listItem = document.createElement('li');
+      const reportName = `${reportData.highway} ${reportData.km} ${reportData.direction} ${reportData.date}`;
+
+      const reportLink = document.createElement('a');
+      reportLink.href = '#';
+      reportLink.textContent = reportName;
+      reportLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        // Display the report content in the modal
+        modalReportContent.value = reportData.content;
+        reportModal.style.display = 'block';
+        // Set up the download button
+        downloadReportBtn.onclick = () => {
+          downloadReportAsTextFile(reportData);
+        };
+      });
+
+      // Add a delete button
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Eliminar';
+      deleteBtn.className = 'delete-button';
+      deleteBtn.addEventListener('click', () => {
+        if (confirm('¿Está seguro de que desea eliminar este reporte?')) {
+          localStorage.removeItem(key);
+          displaySavedFor218Reports(); // Refresh the list
+        }
+      });
+
+      listItem.appendChild(reportLink);
+      listItem.appendChild(deleteBtn);
+      for218List.appendChild(listItem);
+    });
+  }
+
+  // Function to Download Report as Text File
+  function downloadReportAsTextFile(reportData) {
+    const filename = `${reportData.highway}_${reportData.km}_${reportData.direction}_${reportData.date}.txt`;
+    const text = reportData.content;
+
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+  }
+
+  // Close modal when 'X' is clicked
+  closeModalBtn.addEventListener('click', () => {
+    reportModal.style.display = 'none';
+  });
+
+  // Close modal when clicking outside of it
+  window.addEventListener('click', (event) => {
+    if (event.target == reportModal) {
+      reportModal.style.display = 'none';
+    }
+  });
+
 });
